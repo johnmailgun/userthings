@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>User Info : {{user}}</h1>
+    {% if user.is_authenticated %}
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="submit">
+        </form>
+        <h2>Mypost</h2>
+        {% for i in mymodel %}
+        <p><a href="{% url 'pestpoge:blog_detail' i.pk %}">{{i}}</a></p>
+        {% endfor %}
+    {% else %}
+        <h4>Don't have Account? <a href="{% url 'userthings:user_register' %}">register here!</a></h4>
+    {% endif %}
+{% endblock %}
